@@ -357,19 +357,10 @@
             display: flex;
             justify-content: center;
             color: black; */
-
-
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            z-index: 1000;
+            
             background-color: white;
             transition: 0.5s;
-            display: none;
             width: 90%;
-
             max-width: 1500px;
         }
 
@@ -921,6 +912,18 @@
             align-items: center;
         }
 
+        #modalInfo {
+            display: none;
+            position: fixed;
+            z-index: 98000;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(5 5 5 / 76%);
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+        }
+
         .height100 {
             height: 100%
         }
@@ -1084,9 +1087,11 @@
         <div id="imgContainer"></div>
     </div>
 
-    <div id="mySidepanel" class="sidepanel">
-        <div class="closebtn" onclick="closeSidePannel()">&times;</div>
-        <div id="sidePanelContent"></div>
+    <div id="modalInfo">
+        <div id="mySidepanel" class="sidepanel">
+            <div class="closebtn" onclick="closeSidePannel()">&times;</div>
+            <div id="sidePanelContent"></div>
+        </div>
     </div>
 
     <div id="map"></div>
@@ -3054,7 +3059,7 @@
                 minZoom: 22,//init zoom, to remove flickering while waiting for admin vars to load
                 'paint': {
                     'circle-radius': 15,
-                    'circle-color':  ['get', 'color'],
+                    'circle-color': ['get', 'color'],
                     'circle-stroke-color': 'white',
                     'circle-stroke-width': 1
                 }
@@ -3716,9 +3721,12 @@
 
         function openSidePannel(data) {
             document.getElementById("mySidepanel").style.display = "inline";
+            document.getElementById("modalInfo").style.display = "flex";
+            
             sidePanelContent.innerHTML = data;
         }
         function closeSidePannel() {
+            document.getElementById("mySidepanel").style.display = "none";
             document.getElementById("mySidepanel").style.display = "none";
         }
 
