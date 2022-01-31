@@ -2572,11 +2572,12 @@
                 mainData.lots = [];
                 mainData.lots.push(...json)
 
-                const data = json.filter(i => i['Lot_Polygon_Active'].toLowerCase() === "true") //filter by Lot_Polygon_Active
 
                 let bounds = new mapboxgl.LngLatBounds();
-                const pins = data
-                    //.filter(i => i['Lot_Status'].toLowerCase() === "sold")
+                const pins = json
+                    .filter(i => i['Lot_Status'].toLowerCase() !== "available inactive")
+                    .filter(i => i['Lot_Status'].toLowerCase() !== "hidden")
+                    //.filter(i => i['Lot_Polygon_Active'].toLowerCase() === "true")
                     .map(i => {
 
                         const latlng = [+i.Lot_Longitude, +i.Lot_Latitude];
@@ -2596,12 +2597,16 @@
                     })
                 console.log('pins', pins);
 
-
+                //MAP CIRLCES 
                 map.getSource("pins").setData({
                     "type": "FeatureCollection",
                     "features": pins
                 })
-                const lotsGeometry = data
+
+
+
+                const lotsGeometry = json
+                    .filter(i => i['Lot_Polygon_Active'].toLowerCase() === "true")
                     .filter(i => i.Lot_Polygon_Data !== "")
                     .map(i => {
                         const lot = JSON.parse(i.Lot_Polygon_Data);
@@ -2623,7 +2628,7 @@
 
                 //URL PARAMS
                 if (urlProps.lotid && urlProps.lotid > 0) {
-                    const c = data.find(i => +i['LOT_ID'] === +urlProps.lotid)
+                    const c = json.find(i => +i['LOT_ID'] === +urlProps.lotid)
                     if (c) {
                         map.flyTo({
                             center: [c.Lot_Longitude, +c.Lot_Latitude],
