@@ -1094,7 +1094,7 @@
     <div id="legend">
         <div id="legend-title">LEGEND</div>
         <div id="legend-content">
-            <img src="img/buttons/Legend@2x.png" id="legendImage" alt="">
+            <img src="img/buttons/legendResized50.png" id="legendImage" alt="">
         </div>
         <div class="flex-center">
             <div id="legend-close" class="">&times;</div>
@@ -1248,8 +1248,6 @@
         // const legendTitle = document.getElementById('legend-title');
         // const legendContent = document.getElementById('legend-content');
         legendTitle.addEventListener("click", () => {
-
-
             legend.style.height = legendImage.naturalHeight + 115 + `px`;
         })
         legendClose.addEventListener("click", () => {
@@ -3056,7 +3054,7 @@
                 minZoom: 22,//init zoom, to remove flickering while waiting for admin vars to load
                 'paint': {
                     'circle-radius': 15,
-                    'circle-color': ['get', 'color'],
+                    'circle-color':  ['get', 'color'],
                     'circle-stroke-color': 'white',
                     'circle-stroke-width': 1
                 }
