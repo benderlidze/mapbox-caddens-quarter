@@ -2567,11 +2567,8 @@
             //get LOTS data
             getObject('object_1').then(json => {
 
-                console.log('json', json);
-
                 mainData.lots = [];
                 mainData.lots.push(...json)
-
 
                 let bounds = new mapboxgl.LngLatBounds();
                 const pins = json
